@@ -3,7 +3,7 @@ import axios from 'axios';
 // 1. DYNAMIC BASE URL
 // If we are in production, use Render. If local, use localhost.
 const BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://next-js-and-typescript-project-1.onrender.com/api' // Your Render URL
+  ? 'https://next-js-and-typescript-project-with-auth.onrender.com/api' 
   : 'http://localhost:3500/api';
 
 const api = axios.create({
@@ -12,7 +12,6 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
   withCredentials: true,
-  timeout: 60000,
 });
 
 // ... keep your interceptors exactly as they are ...

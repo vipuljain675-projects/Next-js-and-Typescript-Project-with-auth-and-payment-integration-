@@ -22,10 +22,11 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const app = express();
 const server = http.createServer(app);
 
-// 🟢 CLEANED: Only allow Localhost and the variable from .env
+// 🟢 UPDATE: Added your specific Vercel URL here
 const allowedOrigins = [
   'http://localhost:3000',
-  process.env.CLIENT_URL_API // This allows you to update the URL in .env without changing code
+  'https://next-js-and-typescript-project-with-nine.vercel.app', // Your new Vercel App
+  process.env.CLIENT_URL_API // Fallback to .env variable
 ].filter(Boolean);
 
 const io = new Server(server, {
@@ -44,7 +45,7 @@ if (!fs.existsSync(uploadDir)){
     fs.mkdirSync(uploadDir);
 }
 
-// 🟢 UPDATED CORS: stricter rules
+// CORS Middleware
 app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
@@ -53,12 +54,6 @@ app.use(cors({
     // Check if the origin is explicitly allowed
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
-    }
-
-    // (Optional) Allow any Vercel preview deployment for convenience
-    // If you want strict security, delete these 3 lines below:
-    if (/^https:\/\/.*\.vercel\.app$/.test(origin)) {
-       return callback(null, true);
     }
 
     callback(new Error('Not allowed by CORS'));
