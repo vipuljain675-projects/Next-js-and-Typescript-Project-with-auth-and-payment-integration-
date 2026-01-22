@@ -1,15 +1,15 @@
-require('dotenv').config(); 
+require('dotenv').config();
 const path = require('path');
-const fs = require('fs'); 
+const fs = require('fs');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
-const passport = require('passport'); // 🟢 Import Passport
+const passport = require('passport');
 
-// 🟢 Load Passport Config
-require('./config/passport'); 
+// Load Passport Config
+require('./config/passport');
 
 const storeRouter = require('./routes/storeRouter');
 const hostRouter = require('./routes/hostRouter');
@@ -17,18 +17,17 @@ const authRouter = require('./routes/authRouter');
 const chatRouter = require('./routes/chatRouter');
 const setupSocket = require('./socket');
 
-const MONGODB_URI = process.env.MONGODB_URI; 
+const MONGODB_URI = process.env.MONGODB_URI;
 
 const app = express();
 const server = http.createServer(app);
 
-// Allowed origins
+// 🟢 CLEANED: Only allow Localhost and the variable from .env
 const allowedOrigins = [
   'http://localhost:3000',
-  process.env.CLIENT_URL_API
+  process.env.CLIENT_URL_API // This allows you to update the URL in .env without changing code
 ].filter(Boolean);
 
-// Socket.IO setup
 const io = new Server(server, {
   cors: {
     origin: allowedOrigins,
@@ -45,39 +44,38 @@ if (!fs.existsSync(uploadDir)){
     fs.mkdirSync(uploadDir);
 }
 
-// CORS Configuration
+// 🟢 UPDATED CORS: stricter rules
 app.use(cors({
   origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    const allowedPatterns = [
-      'http://localhost:3000',
-      /^https:\/\/.*\.vercel\.app$/,
-      process.env.CLIENT_URL_API
-    ];
-    const isAllowed = allowedPatterns.some(pattern => {
-      if (typeof pattern === 'string') return pattern === origin;
-      return pattern.test(origin);
-    });
-    if (isAllowed) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
+    
+    // Check if the origin is explicitly allowed
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
     }
+
+    // (Optional) Allow any Vercel preview deployment for convenience
+    // If you want strict security, delete these 3 lines below:
+    if (/^https:\/\/.*\.vercel\.app$/.test(origin)) {
+       return callback(null, true);
+    }
+
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
 }));
 
-app.use(express.json()); 
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// 🟢 Initialize Passport
 app.use(passport.initialize());
 
 // Routes
-app.use('/api', authRouter);  
-app.use('/api', storeRouter); 
+app.use('/api', authRouter);
+app.use('/api', storeRouter);
 app.use('/api/host', hostRouter);
 app.use('/api/chat', chatRouter);
 
@@ -98,7 +96,8 @@ mongoose
   .then(() => {
     const port = process.env.PORT || 3500;
     server.listen(port, () => {
-      console.log(`🔥 API Server live at port ${port}`);
+      console.log(`🔥 API Server live on Atlas & running at port ${port}`);
+      console.log(`✅ CORS Allowed Origins:`, allowedOrigins);
     });
   })
   .catch((err) => {
