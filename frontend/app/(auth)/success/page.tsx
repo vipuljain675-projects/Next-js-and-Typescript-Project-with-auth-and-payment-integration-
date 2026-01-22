@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useContext, Suspense } from 'react';
+import { useEffect, useContext, Suspense, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AuthContext } from '@/context/AuthContext';
 
@@ -7,24 +7,34 @@ function SuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const auth = useContext(AuthContext);
+  
+  // 🟢 NEW: This creates a "memory" to track if we already logged in
+  const processed = useRef(false);
 
   useEffect(() => {
+    // 🟢 CHECK: If we already did this, STOP immediately.
+    if (processed.current) return;
+
     const token = searchParams.get('token');
     const userStr = searchParams.get('user');
 
     if (token && userStr && auth) {
       try {
+        // 🟢 MARK AS DONE: Set this to true so it never runs again
+        processed.current = true;
+
         const user = JSON.parse(userStr);
-        // Login using Context
+        
+        // Perform login
         auth.login(user, token);
-        // Redirect to home after successful login
-        router.push('/');
+        
+        // Redirect home
+        router.replace('/'); 
       } catch (e) {
         console.error("Auth parsing error", e);
         router.push('/login');
       }
     } else if (!token) {
-        // If no token, go back to login
        router.push('/login');
     }
   }, [searchParams, auth, router]);
