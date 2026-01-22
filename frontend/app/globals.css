@@ -1,0 +1,1034 @@
+/* =========================================================
+   IMPORTS - MUST BE AT THE TOP
+========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+/* =========================================================
+   CSS VARIABLES
+========================================================= */
+:root {
+  --airbnb-red: #ff385c;
+  --airbnb-hover: #d90b3e;
+  --dark: #222222;
+  --gray: #717171;
+  --light-gray: #dddddd;
+  --card-radius: 16px;
+  --nav-height: 80px; 
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', sans-serif !important; 
+  color: var(--dark);
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+  padding-top: 160px; /* Increased for taller navbar */
+}
+
+a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+/* =========================================================
+   NAVBAR & NAVIGATION
+========================================================= */
+header {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Search Bar Container - Airbnb Style */
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #DDDDDD;
+  border-radius: 40px;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease;
+  height: 66px;
+  max-width: 850px;
+}
+
+.search-bar-container:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}
+
+.search-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 32px;
+  min-width: 0;
+  flex: 1;
+}
+
+.search-section:hover {
+  background-color: #EBEBEB;
+}
+
+.search-section-start {
+  padding-left: 32px;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+
+.search-section-middle {
+  border-left: 1px solid #DDDDDD;
+}
+
+.search-section-end {
+  padding-right: 12px;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.search-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #222222;
+  margin: 0;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #717171;
+  padding: 0;
+  width: 100%;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.search-input::placeholder {
+  color: #717171;
+  font-weight: 400;
+}
+
+.search-input:focus {
+  outline: none;
+  color: #222222;
+}
+
+.search-button {
+  background: linear-gradient(to right, #E61E4D 0%, #E31C5F 50%, #D70466 100%);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 8px;
+  flex-shrink: 0;
+  transition: transform 0.1s ease;
+}
+
+.search-button:hover {
+  transform: scale(1.04);
+}
+
+.search-button:active {
+  transform: scale(0.96);
+}
+
+.search-button i {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Navigation Tabs in Top Bar (Text only - no icons) */
+.nav-tab-link-top {
+  text-decoration: none;
+  color: #717171;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-tab-link-top:hover {
+  color: #222;
+  background-color: #F7F7F7;
+}
+
+.nav-tab-link-top.active {
+  color: #222;
+  background-color: #F7F7F7;
+}
+
+.user-menu-pill {
+  border: 1px solid #dddddd;
+  border-radius: 21px;
+  padding: 5px 5px 5px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: box-shadow 0.2s;
+  background: white;
+  cursor: pointer;
+}
+
+.user-menu-pill:hover {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+}
+
+.hover-bg-light:hover { 
+  background-color: #f7f7f7; 
+}
+
+.hover-bg-gray:hover { 
+  background-color: #ebebeb; 
+}
+
+/* =========================================================
+   BIG SEARCH BAR
+========================================================= */
+.big-search-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.rounded-pill-start {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+/* =========================================================
+   HOME CARDS GRID - AIRBNB STYLE
+========================================================= */
+
+/* Custom 5-column layout for XL screens */
+@media (min-width: 1400px) {
+  .col-xl-2-4 {
+    flex: 0 0 auto;
+    width: 20% !important;
+  }
+}
+
+/* Adjust gap spacing */
+.row.g-3 {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 1.5rem;
+}
+
+/* Home Card Container */
+.home-card {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.home-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Image wrapper with aspect ratio */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f7f7f7;
+  border-radius: 12px;
+}
+
+.home-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+}
+
+.home-card:hover .home-image {
+  transform: scale(1.04);
+}
+
+/* Wishlist heart button */
+.wishlist-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 2;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wishlist-btn:hover {
+  transform: scale(1.1);
+}
+
+.wishlist-btn svg {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.wishlist-btn:hover svg path {
+  fill: rgba(255, 56, 92, 0.8);
+  stroke: rgba(255, 56, 92, 1);
+}
+
+/* Property info text styling */
+.home-card a {
+  transition: none;
+}
+
+.home-card .fw-bold {
+  font-size: 15px;
+  color: #222222;
+  line-height: 1.3;
+}
+
+.home-card .text-secondary {
+  color: #717171 !important;
+  font-size: 15px;
+}
+
+.home-card .bi-star-fill {
+  color: #222222;
+  font-size: 11px;
+}
+
+.home-card .fw-bold:last-of-type {
+  color: #222222;
+  font-size: 15px;
+}
+
+/* =========================================================
+   DETAIL PAGE - PHOTO GRID
+========================================================= */
+.listing-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.photo-grid-v2 {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: repeat(2, 200px);
+  gap: 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.photo-hero {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+.photo-hero img, .photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+  cursor: pointer;
+}
+
+.photo-hero img:hover, .photo-item img:hover {
+  filter: brightness(0.9);
+}
+
+.photo-side-grid {
+  display: contents; 
+}
+
+.photo-item:nth-child(1) { grid-column: 2 / 3; grid-row: 1 / 2; }
+.photo-item:nth-child(2) { grid-column: 3 / 4; grid-row: 1 / 2; }
+.photo-item:nth-child(3) { grid-column: 2 / 3; grid-row: 2 / 3; }
+.photo-item:nth-child(4) { grid-column: 3 / 4; grid-row: 2 / 3; }
+
+/* Sticky Booking Sidebar */
+.booking-card {
+  position: sticky;
+  top: 120px;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  background: white;
+  z-index: 10;
+}
+
+/* =========================================================
+   BOARDING PASS TICKET UI
+========================================================= */
+.ticket-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+}
+
+.ticket {
+  display: flex;
+  background: white;
+  width: 100%;
+  max-width: 850px;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ticket-left {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  border-right: 2px dashed #e0e0e0;
+  position: relative;
+}
+
+.ticket-left::after, 
+.ticket-left::before {
+  content: "";
+  position: absolute;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.ticket-left::after { top: -10px; }
+.ticket-left::before { bottom: -10px; }
+
+/* =========================================================
+   RESPONSIVENESS
+========================================================= */
+@media (max-width: 992px) {
+  .photo-grid-v2 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 300px;
+  }
+  .photo-item { display: none; }
+  .photo-hero { grid-column: 1 / -1; }
+}
+
+@media (max-width: 768px) {
+  body { padding-top: 80px; }
+  .booking-card { position: static; margin-top: 24px; }
+  .hero-title { font-size: 2rem; }
+}
+
+.nav-icon-link {
+  transition: opacity 0.2s ease, border-bottom 0.2s ease;
+}
+
+.hover-bg-light {
+  transition: background-color 0.2s, transform 0.1s active;
+}
+
+nav.gap-4 {
+  min-height: 60px;
+}
+
+footer a {
+  color: #717171 !important;
+  transition: text-decoration 0.2s;
+}
+
+footer a:hover {
+  text-decoration: underline !important;
+  color: #222 !important;
+}
+
+footer .bi:hover {
+  color: var(--airbnb-red);
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* =========================================================
+   ANIMATIONS & LOADING STATES
+========================================================= */
+@keyframes pulse {
+  0% { opacity: 1; background-color: #f2f2f2; }
+  50% { opacity: 0.5; background-color: #e5e5e5; }
+  100% { opacity: 1; background-color: #f2f2f2; }
+}
+
+.skeleton-card {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-text {
+  height: 15px;
+  margin-top: 10px;
+  border-radius: 4px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Modern "Load More" Button */
+.load-more-btn {
+  background: #fff;
+  border: 1px solid #222;
+  color: #222;
+  padding: 13px 23px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.load-more-btn:hover {
+  background: #f7f7f7;
+  transform: scale(1.04);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Image Hover Zoom */
+.group-card img {
+  transition: transform 0.4s ease;
+}
+
+.group-card:hover img {
+  transform: scale(1.05);
+}
+
+/* ... keep all your existing CSS from before ... */
+
+/* Add this at the very bottom of your globals.css */
+body.auth-layout {
+  padding-top: 0 !important;
+  overflow-x: hidden;
+}
+
+.auth-main-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================
+   GSAP ANIMATION STYLES
+   ============================================ */
+
+/* Logo hover animation */
+.logo-container:hover .logo-icon {
+  animation: logoSpin 0.6s ease-in-out;
+}
+
+@keyframes logoSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.logo-text {
+  transition: all 0.3s ease;
+}
+
+.logo-container:hover .logo-text {
+  color: #E31C5F !important;
+  letter-spacing: 1px;
+}
+
+/* Navbar shadow */
+.navbar-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Navigation link animations */
+.nav-tab-link-top {
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+}
+
+.nav-tab-link-top::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #FF385C;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+}
+
+.nav-tab-link-top:hover::after,
+.nav-tab-link-top.active::after {
+  width: 80%;
+}
+
+.nav-tab-link-top:hover {
+  color: #FF385C;
+  background: rgba(255, 56, 92, 0.05);
+}
+
+.nav-tab-link-top.active {
+  color: #FF385C;
+  font-weight: 600;
+}
+
+/* Animated nav links */
+.nav-link-animated {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link-animated::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #FF385C;
+  transition: width 0.3s ease;
+}
+
+.nav-link-animated:hover::before {
+  width: 100%;
+}
+
+.nav-link-animated:hover {
+  color: #FF385C !important;
+  transform: translateY(-2px);
+}
+
+/* Badge pulse animation */
+.badge-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* User menu pill */
+.user-menu-pill {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.user-menu-pill:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.user-avatar {
+  transition: all 0.3s ease;
+}
+
+.user-menu-pill:hover .user-avatar {
+  transform: scale(1.1);
+  background: #FF385C !important;
+}
+
+/* Dropdown menu */
+.dropdown-menu-custom {
+  transform-origin: top right;
+}
+
+.dropdown-item-custom {
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin: 0 8px;
+}
+
+.dropdown-item-custom:hover {
+  background: rgba(255, 56, 92, 0.08) !important;
+  transform: translateX(4px);
+  color: #FF385C !important;
+}
+
+/* Search bar */
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 40px;
+  padding: 8px 8px 8px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+}
+
+.search-bar-container:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.search-bar-container:focus-within {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  border-color: #FF385C;
+}
+
+.search-section {
+  flex: 1;
+  padding: 8px 16px;
+  border-right: 1px solid #eee;
+  transition: all 0.2s ease;
+}
+
+.search-section:hover {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 32px;
+}
+
+.search-section-start {
+  border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
+}
+
+.search-section:last-of-type {
+  border-right: none;
+}
+
+.search-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 2px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  color: #717171;
+  background: transparent;
+}
+
+.search-input::placeholder {
+  color: #b0b0b0;
+}
+
+.search-button {
+  background: linear-gradient(135deg, #FF385C 0%, #E31C5F 100%);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(255, 56, 92, 0.3);
+}
+
+.search-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 56, 92, 0.4);
+  background: linear-gradient(135deg, #E31C5F 0%, #C13584 100%);
+}
+
+.search-button:active {
+  transform: scale(0.95);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-bar-container {
+    max-width: 100%;
+    padding: 6px 6px 6px 12px;
+  }
+  
+  .search-section {
+    padding: 6px 8px;
+  }
+  
+  .search-button {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Hover effects for lists/cards (for your home page) */
+.listing-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.listing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.listing-image {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.listing-card:hover .listing-image {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   HOME CARDS ANIMATIONS
+   ============================================ */
+
+.home-card {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border-radius: 12px;
+  will-change: transform;
+}
+
+.home-card:hover {
+  transform: translateY(-4px);
+}
+
+.image-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+.home-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+}
+
+.home-card:hover .home-image {
+  transform: scale(1.05);
+}
+
+/* Wishlist Heart Button */
+.wishlist-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 4px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.wishlist-btn:hover {
+  transform: scale(1.1);
+}
+
+.wishlist-btn:hover .heart-path {
+  fill: rgba(255, 56, 92, 0.8) !important;
+  stroke: #fff;
+}
+
+.wishlist-btn:active {
+  transform: scale(0.95);
+}
+
+/* Load More Button */
+.load-more-btn {
+  background: white;
+  border: 2px solid #222;
+  color: #222;
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.load-more-btn:hover {
+  background: #222;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.load-more-btn:active {
+  transform: translateY(0);
+}
+
+/* Empty State Animation */
+.empty-state {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Star Icon Animation */
+.bi-star-fill {
+  color: #FFD700;
+  font-size: 13px;
+  animation: starPulse 2s ease-in-out infinite;
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Loading Spinner Enhancement */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.3em;
+}
+
+/* Responsive Grid Fix */
+@media (min-width: 1400px) {
+  .col-xl-2-4 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
+
+/* Smooth page transitions */
+main {
+  animation: pageLoad 0.5s ease-out;
+}
+
+@keyframes pageLoad {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   HOME CARDS - FIXED ANIMATIONS
+   ============================================ */
+
+.home-card {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border-radius: 12px;
+  /* IMPORTANT: Remove will-change to prevent vanishing */
+}
+
+.home-card:hover {
+  transform: translateY(-4px);
+}
+
+.image-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: #f7f7f7; /* Fallback while image loads */
+}
+
+.home-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  display: block; /* IMPORTANT: Prevents image jumping */
+}
+
+.home-card:hover .home-image {
+  transform: scale(1.05);
+}
+
+/* Wishlist Heart Button */
+.wishlist-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  padding: 4px;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.wishlist-btn:hover {
+  transform: scale(1.1);
+}
+
+.wishlist-btn:hover .heart-path {
+  fill: rgba(255, 56, 92, 0.8) !important;
+  stroke: #fff;
+}
+
+/* Load More Button */
+.load-more-btn {
+  background: white;
+  border: 2px solid #222;
+  color: #222;
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.load-more-btn:hover {
+  background: #222;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Star Icon */
+.bi-star-fill {
+  color: #222;
+  font-size: 13px;
+}
+
+/* Responsive Grid */
+@media (min-width: 1400px) {
+  .col-xl-2-4 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
