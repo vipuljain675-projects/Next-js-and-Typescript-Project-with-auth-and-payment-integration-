@@ -24,9 +24,12 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = () => {
-    // Redirect to backend Google Auth endpoint
-    // IMPORTANT: Ensure this matches your backend URL (3500)
-    window.location.href = "http://localhost:3500/api/auth/google";
+    // 🟢 FIXED: Uses the environment variable so it works on Mobile & Live Site
+    // Falls back to localhost only if the variable is missing
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3500/api';
+    
+    // Redirect browser to the backend Google endpoint
+    window.location.href = `${backendUrl}/auth/google`;
   };
 
   return (
@@ -85,7 +88,7 @@ export default function LoginPage() {
               </button>
             </form>
             
-            {/* 🟢 NEW: Divider and Google Button */}
+            {/* Divider and Google Button */}
             <div className="d-flex align-items-center my-3">
               <hr className="flex-grow-1" style={{ color: '#dddddd' }} /> 
               <span className="mx-2 text-muted small">or</span> 
