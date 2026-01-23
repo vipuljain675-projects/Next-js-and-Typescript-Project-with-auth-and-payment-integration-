@@ -1,51 +1,102 @@
-🏡 Airbnb Clone (MERN Stack + Next.js)
-A full-stack vacation rental application built with Next.js, TypeScript, Node.js, and MongoDB. This project features real-time chat, map integration, booking management, and a dual-role system (Guest/Host).
+🏡 Full-Stack Airbnb Clone
+A production-ready vacation rental platform featuring real-time availability, secure payments, and instant messaging.
 
-🚀 Live Demo
-Frontend (Vercel): https://next-js-and-typescript-project.vercel.app/
+🔴 LIVE DEMO | ⚙️ BACKEND API
 
-Backend (Render): https://next-js-and-typescript-project-1.onrender.com
+📖 About The Project
+This is a fully functional full-stack web application designed to replicate core Airbnb features. It handles the complete user flow from browsing listings to booking a stay and processing payments.
 
-🛠 Tech Stack
+Unlike simple UI clones, this project is logic-heavy, featuring a robust backend, complex state management, and third-party integrations for payments and authentication.
+
+✨ Key Features
+🔐 Authentication: Secure login/signup with JWT & Google OAuth (Passport.js).
+
+💳 Payments: Fully integrated Stripe checkout (Test Mode) for secure transactions.
+
+💬 Real-Time Chat: Instant messaging between Guests and Hosts using Socket.io.
+
+🗺️ Interactive Maps: Dynamic location browsing with Leaflet Maps.
+
+📅 Booking System: Smart date-picking with conflict detection (prevents double bookings).
+
+🏠 Host Dashboard: Users can become hosts, add properties, and manage bookings.
+
+☁️ Image Upload: Multi-image upload support.
+
+🛠️ Tech Stack
 Frontend
-Framework: Next.js 14 (App Router)
+Next.js 14 (App Router)
 
-Language: TypeScript
+TypeScript
 
-Styling: CSS
+Bootstrap (Responsive UI)
 
-HTTP Client: Axios
-
-Maps: Leaflet / React-Leaflet
-
-State Management: React Context API
-
-Deployment: Vercel
+Redux / Context API (State Management)
 
 Backend
-Runtime: Node.js
+Node.js
 
-Framework: Express.js
+Express.js
 
-Database: MongoDB (Mongoose ODM)
+Socket.io
 
-Real-time: Socket.io (Chat functionality)
+Database & Services
+MongoDB (Mongoose ODM)
 
-Authentication: JWT (JSON Web Tokens)
+Stripe API
 
-Deployment: Render
+Google Cloud Platform
 
-✨ Features
-User Authentication: Login and Signup with JWT.
+Render (Backend Hosting) & Vercel (Frontend Hosting)
 
-Property Management: Hosts can add, edit, and delete property listings.
+🚀 Getting Started Locally
+Follow these steps to run the project on your local machine.
 
-Booking System: Guests can book properties for specific dates.
+1. Clone the Repository
+Bash
+git clone https://github.com/vipuljain675/airbnb-clone-v2.git
+cd airbnb-clone-v2
+2. Install Dependencies
+You need to install packages for both the frontend and backend.
 
-Map Search: Interactive maps to view property locations.
+Bash
+# Install Backend Deps
+cd backend
+npm install
 
-Real-time Chat: Instant messaging between Guests and Hosts using Socket.io.
+# Install Frontend Deps
+cd ../frontend
+npm install
+3. Configure Environment Variables
+Create a .env file in both the frontend and backend folders.
 
-Reviews: Users can leave ratings and reviews for stays.
+Backend .env:
 
-Image Uploads: Multer integration for handling property images.
+Code snippet
+PORT=3500
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+JWT_REFRESH_SECRET=your_refresh_secret
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+STRIPE_SECRET_KEY=your_stripe_secret_key
+CLIENT_URL=http://localhost:3000
+Frontend .env:
+
+Code snippet
+NEXT_PUBLIC_API_URL=http://localhost:3500/api
+4. Run the App
+Open two terminal tabs:
+
+Terminal 1 (Backend):
+
+Bash
+cd backend
+npm start
+# Server runs on port 3500
+Terminal 2 (Frontend):
+
+Bash
+cd frontend
+npm run dev
+# App runs on http://localhost:3000
