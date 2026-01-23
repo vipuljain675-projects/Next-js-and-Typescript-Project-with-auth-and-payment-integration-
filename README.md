@@ -100,3 +100,6 @@ Bash
 cd frontend
 npm run dev
 # App runs on http://localhost:3000
+
+
+Live demo of project - https://next-js-and-typescript-project-with-nine.vercel.app/
