@@ -20,6 +20,10 @@ const setupSocket = require('./socket');
 const MONGODB_URI = process.env.MONGODB_URI;
 
 const app = express();
+
+// 🟢 NEW: Trust the Proxy (Render/Vercel) to handle HTTPS
+app.set('trust proxy', 1);
+
 const server = http.createServer(app);
 
 // 🟢 UPDATE: Added your specific Vercel URL here
